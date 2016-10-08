@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
-using Day1Homework.Model;
+using Day1Homework.Helpers;
+using Day1Homework.Models;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 namespace Day1Homework.Tests
@@ -12,28 +13,29 @@ namespace Day1Homework.Tests
         public void SumCostByGroup3()
         {
             // arrange
-            var target = new Calculator();
+            var target = new CalculateHelper();
             var products = GetProductList();
             int groupCount = 3;
-            var expected = new int[] { 6, 15, 24, 21 };
+            var expected = new List<int>() { 6, 15, 24, 21 };
 
             // act
-            var actual = target.SumByGroup(products.OrderBy(p => p.Id).Select(p => p.Cost), groupCount);
+            var actual = target.SumByGroup(products.OrderBy(p => p.Id).Select(p => p.Cost).ToList(), groupCount);
 
             // assert
             CollectionAssert.AreEqual(expected, actual);
         }
 
+        [TestMethod()]
         public void SumRevenueByGroup4()
         {
             // arrange
-            var target = new Calculator();
+            var target = new CalculateHelper();
             var products = GetProductList();
             int groupCount = 4;
             var expected = new int[] { 50, 66, 60 };
 
             // act
-            var actual = target.SumByGroup(products.OrderBy(p => p.Id).Select(p => p.Revenue), groupCount);
+            var actual = target.SumByGroup(products.OrderBy(p => p.Id).Select(p => p.Revenue).ToList(), groupCount);
 
             // assert
             CollectionAssert.AreEqual(expected, actual);
